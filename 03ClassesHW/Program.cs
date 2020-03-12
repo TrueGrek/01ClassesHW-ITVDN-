@@ -10,7 +10,8 @@
 //Создать два метода: double LengthSide(Point A, Point B), который рассчитывает длину
 //стороны многоугольника; void PerimeterCalculator(), который рассчитывает периметр
 //многоугольника.
-//Написать программу, которая выводит на экран название и периметр многоугольника. 
+//Написать программу, которая выводит на экран название и периметр многоугольника. 
+
 
 using System;
 
@@ -18,11 +19,20 @@ namespace _03ClassesHW
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            Figure cube = new Figure("cube");
-            Console.WriteLine(cube.CalculatePerimeter());
+            //Создание объекта класса Figure и передача конструктору трех объектов класса Point в качестве аргументов.  
+            Figure figure = new Figure(new Point("A", 1, 1), new Point("B", 1, 4), new Point("C", 4, 4));
+
+            //Отображение результата выполнения метода Type.
+            Console.Write("{0}, P = ", figure.Type);
+
+            //Вызов метода PerimeterCalculator для вычисления периметра фигуры.
+            figure.PerimeterCalculator();
+
+            // Delay.
             Console.ReadKey();
+
         }
     }
 }

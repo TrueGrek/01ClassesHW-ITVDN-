@@ -6,50 +6,70 @@ namespace _03ClassesHW
 {
     class Figure
     {
-        int number;
-        Point[] points;
-        string name;
-        public string Name
-        {
-            get
-            {
-                return name;
-            }
-            set
-            {
-                name = value;
-            }
-        }
-        public void InitializeFigure()
-        {
-            Console.WriteLine("enter number of verticles of your figure");
-            number = int.Parse(Console.ReadLine());
-            points = new Point[number];
-            for (int i = 0; i < points.Length; i++)
-            {
-                points[i] = new Point();
-            }
+        //Создание массива значений типа Point
+        Point[] point;
 
-
-        }
-        public double LengthSide(Point a, Point b)
+        string type;
+        //Свойство для отображения типа фигуры 
+        public string Type
         {
-            return Math.Sqrt(Math.Pow(a.X - b.X, 2) + Math.Pow(a.Y - b.Y, 2));
+            get { return type; }
         }
 
-        public double CalculatePerimeter()
+        //Метод вычисления длинны сторони
+        double LengthSide(Point A, Point B)
         {
-            double perimeter = 0;
-            for (int i = 1; i < points.Length; i++)
-            {
-                perimeter += this.LengthSide(points[i - 1], points[i]);
-            }
-            perimeter += this.LengthSide(points[0], points[points.Length - 1]);
-            return perimeter;
+            //Возвращает квадратный корень из суммы разниц координат возвышенных в квадрат  =√((Y.b - Y.a)^2 + (X.b - X.a)^2)
+            return Math.Sqrt(Math.Pow((B.Y - A.Y), 2) + Math.Pow((B.X - A.X), 2));
         }
-        public Figure(string name)
+
+        //Метод вычисления периметра фигуры
+        public void PerimeterCalculator()
         {
-            InitializeFigure();
+            double sum = 0;
+
+            for (int i = 0; i < point.Length - 1; i++)
+            {
+                //Суммируем длину каждой стороны фигуры
+                sum += LengthSide(point[i], point[i + 1]);
+            }
+            //Прибавляем длину последней стороны
+            sum += LengthSide(point[point.Length - 1], point[0]);
+            Console.Write(sum);
+        }
+        //Пользовательский конструктор
+        public Figure(Point p1, Point p2, Point p3)
+        {
+            //Инициализация полей.
+            point = new Point[3];
+            point[0] = p1;
+            point[1] = p2;
+            point[2] = p3;
+            type = "Triangle";
+        }
+
+        //Перегрузка пользовательского конструктора
+        public Figure(Point p1, Point p2, Point p3, Point p4)
+        {
+            //Инициализация полей.
+            point = new Point[4];
+            point[0] = p1;
+            point[1] = p2;
+            point[2] = p3;
+            point[3] = p4;
+            type = "Tetragon";
+        }
+        //Перегрузка пользовательского конструктора
+        public Figure(Point p1, Point p2, Point p3, Point p4, Point p5)
+        {
+            //Инициализация полей.
+            point = new Point[5];
+            point[0] = p1;
+            point[1] = p2;
+            point[2] = p3;
+            point[3] = p4;
+            point[4] = p5;
+            type = "Pentagon";
         }
     }
 }
